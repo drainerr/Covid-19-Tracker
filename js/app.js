@@ -21,13 +21,10 @@ const renderStats = (country) => {
 }
 
 const renderDefaultStats = () => {
-    navigator.geolocation.getCurrentPosition(pos =>{        
-       const {latitude: lat, longitude: lng} = pos.coords
-        fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)
+        fetch('https://api.db-ip.com/v2/free/self')
         .then(res => res.json())
         .then(data => {
-            renderStats(data.country)
-        })
+            renderStats(data.countryName)
     })
 };
 renderDefaultStats();
