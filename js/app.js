@@ -7,6 +7,12 @@ const searchBtn = document.querySelector('.search-btn')
 
 let enteredCountry
 
+document.addEventListener('DOMContentLoaded',() => {
+    if(localStorage.getItem('country') !== null){
+        renderStats(JSON.parse(localStorage.getItem('country')))  
+    } 
+})
+
 const renderStats = (country) => {
     fetch('https://covid-api.mmediagroup.fr/v1/cases')
         .then(resp => resp.json())
@@ -26,7 +32,10 @@ const renderDefaultStats = () => {
         fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)
         .then(res => res.json())
         .then(data => {
-            renderStats(data.country)
+            if(localStorage.getItem('country') === null){
+                localStorage.setItem('country',JSON.stringify(data.country))
+                renderStats(JSON.parse(localStorage.getItem('country'))) 
+            } 
         })
     })
 };
