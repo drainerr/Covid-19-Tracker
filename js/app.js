@@ -7,7 +7,7 @@ const searchBtn = document.querySelector('.search-btn')
 
 let enteredCountry
 
-const renderStats = (country) =>{
+const renderStats = (country) => {
     fetch('https://covid-api.mmediagroup.fr/v1/cases')
         .then(resp => resp.json())
         .then(stats => {
@@ -17,7 +17,7 @@ const renderStats = (country) =>{
             deaths.innerHTML = `<span class="symbol">🔴 </span> Deaths: <span class="deaths">${countryData.deaths}</span>`
             population.innerHTML = `<span class="symbol">👨‍👩‍👧 </span> Population: <span class="population">${countryData.population}</span>`
         })
-        .catch(err => console.error(new Error(`'Country not found' ${err.message}`)))
+        .catch(err => console.error(new Error(`Country not found | ${err.message}`)))
 }
 
 const renderDefaultStats = () => {
@@ -32,11 +32,11 @@ const renderDefaultStats = () => {
 };
 renderDefaultStats();
 
-inputElem.addEventListener('input',function(e){
+inputElem.addEventListener('input',() => {
    enteredCountry = inputElem.value
 })
 
-searchBtn.addEventListener('click',()=>{
-    renderStats(enteredCountry)
+searchBtn.addEventListener('click',() => {
+   renderStats(enteredCountry)
 })
 

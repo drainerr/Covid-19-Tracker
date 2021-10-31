@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
 *{
     padding:0;
     margin:0;
     box-sizing: border-box;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 body{
     background-image: url('../img/merlin_171156351_5f7aaa07-39f4-4e2b-af28-8270ac4e2d47-superJumbo.jpg');
@@ -18,6 +20,7 @@ body{
         display:flex;
         justify-content: center;
         flex-direction: column;
+        align-items: center;
         background-color:rgba(0,0,0,0.8);
         text-shadow: black 1px 1px;
         border-radius:15px;
@@ -26,11 +29,11 @@ body{
         box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
         .country{
             margin-bottom:20px;
-            font-size:2em;
+            font-size:1.8em;
             text-align: center;
         }
         .symbol{
-            font-size:.7em;
+            font-size:.6em;
             margin-right:10px;
         }
         .confirmed,.deaths,.population{
