@@ -7,6 +7,12 @@ const searchBtn = document.querySelector('.search-btn')
 
 let enteredCountry
 
+document.addEventListener('DOMContentLoaded',() => {
+    if(localStorage.getItem('country') !== null){
+        renderStats(JSON.parse(localStorage.getItem('country')))  
+    } 
+})
+
 const renderStats = async (country) => {
     try{
         const res = await fetch('https://covid-api.mmediagroup.fr/v1/cases')
@@ -34,7 +40,10 @@ const renderDefaultStats = async () => {
         const {latitude: lat, longitude: lng} = pos.coords
         const res = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)
         const data = await res.json();
-        renderStats(data.country)   
+        if(localStorage.getItem('country') === null){
+            localStorage.setItem('country',JSON.stringify(data.country))
+            renderStats(JSON.parse(localStorage.getItem('country'))) 
+        }
     }
     catch(error){
         console.error(error.message)
