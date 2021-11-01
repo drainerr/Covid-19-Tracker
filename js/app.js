@@ -4,6 +4,7 @@ const deaths = document.querySelector('.deaths-li')
 const population = document.querySelector('.population-li')
 const inputElem = document.querySelector('.input')
 const searchBtn = document.querySelector('.search-btn')
+const container = document.querySelector('.stats-container')
 
 let enteredCountry
 
@@ -17,7 +18,10 @@ const renderStats = (country) => {
             deaths.innerHTML = `<span class="symbol">🔴 </span> Deaths: <span class="deaths">${countryData.deaths}</span>`
             population.innerHTML = `<span class="symbol">👨‍👩‍👧 </span> Population: <span class="population">${countryData.population}</span>`
         })
-        .catch(err => console.error(new Error(`Country not found | ${err.message}`)))
+        .catch(err => {
+            const error = new Error('Country not found')
+            console.error(`${error} | ${err.message}`)
+        })
 }
 
 const renderDefaultStats = () => {
