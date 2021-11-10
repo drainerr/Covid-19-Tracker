@@ -6,7 +6,7 @@ const inputElem = document.querySelector('.input')
 const searchBtn = document.querySelector('.search-btn')
 const container = document.querySelector('.stats-container')
 
-let enteredCountry
+let givenCountry = '';
 
 const renderStats = async (country) => {
     try{
@@ -20,8 +20,8 @@ const renderStats = async (country) => {
         population.innerHTML = `<span class="symbol">👨‍👩‍👧 </span> Population: <span class="population">${countryData.population}</span>`
     }   
     catch(err){
-        const error = new Error('Country not found')
-        console.error(`${error} | ${err.message}`)
+        alert('We could not find a country with the given name \nThe reason probably is that the data of this country is not found in the API we are using or you misspell the name')
+        console.error(`${new Error('Country not found')} | ${err.message}`)
     }
 }
 
@@ -39,9 +39,9 @@ const renderDefaultStats = async () => {
 renderDefaultStats();
 
 inputElem.addEventListener('input',() => {
-   enteredCountry = inputElem.value
+   givenCountry = inputElem.value
 })
 
 searchBtn.addEventListener('click',() => {
-   renderStats(enteredCountry)
+   renderStats(givenCountry)
 })
