@@ -4,49 +4,36 @@ const deaths = document.querySelector('.deaths-li')
 const population = document.querySelector('.population-li')
 const inputElem = document.querySelector('.input')
 const searchBtn = document.querySelector('.search-btn')
+const container = document.querySelector('.stats-container')
 
 let enteredCountry
 
-document.addEventListener('DOMContentLoaded',() => {
-    if(localStorage.getItem('country') !== null){
-        renderStats(JSON.parse(localStorage.getItem('country')))  
-    } 
-})
-
 const renderStats = async (country) => {
     try{
-        const res = await fetch('https://covid-api.mmediagroup.fr/v1/cases')
-        const data = await res.json();
-        let countryData = data[country].All
+        const fetched = await fetch('https://covid-api.mmediagroup.fr/v1/cases');
+        const res = await fetched.json();
+        const stats = await res;
+        let countryData = stats[country].All
         countryName.innerHTML = countryData.country
         confirmed.innerHTML = `<span class="symbol">⚪</span> Confirmed: <span class="confirmed">${countryData.confirmed}</span>`
         deaths.innerHTML = `<span class="symbol">🔴 </span> Deaths: <span class="deaths">${countryData.deaths}</span>`
         population.innerHTML = `<span class="symbol">👨‍👩‍👧 </span> Population: <span class="population">${countryData.population}</span>`
-    }
+    }   
     catch(err){
-        console.error(new Error(`Country not found (The number of requests is limited) -> ${err.message}`))
+        const error = new Error('Country not found')
+        console.error(`${error} | ${err.message}`)
     }
-}
-
-const getPosition = () => {
-    return new Promise((res,rej)=>{
-        navigator.geolocation.getCurrentPosition(res,rej)
-    })
 }
 
 const renderDefaultStats = async () => {
     try{
-        const pos = await getPosition();
-        const {latitude: lat, longitude: lng} = pos.coords
-        const res = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)
-        const data = await res.json();
-        if(localStorage.getItem('country') === null){
-            localStorage.setItem('country',JSON.stringify(data.country))
-            renderStats(JSON.parse(localStorage.getItem('country'))) 
-        }
+        const fetched = await fetch('https://api.db-ip.com/v2/free/self')
+        const res = await fetched.json();
+        const data = res;
+        renderStats(data.countryName)
     }
-    catch(error){
-        console.error(error.message)
+    catch(err){
+        console.error(err.message)
     }
 };
 renderDefaultStats();
@@ -58,4 +45,3 @@ inputElem.addEventListener('input',() => {
 searchBtn.addEventListener('click',() => {
    renderStats(enteredCountry)
 })
-
