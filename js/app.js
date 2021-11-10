@@ -8,6 +8,12 @@ const container = document.querySelector('.stats-container')
 
 let givenCountry = '';
 
+const liveAlert = (message,type) => {
+    let wrapper = document.createElement('div')
+    wrapper.innerHTML = `<div class="alert alert-${type} alert-dismissible" role="alert"> ${message} <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`
+    document.querySelector('.liveAlertPlaceholder').append(wrapper)
+}
+
 const renderStats = async (country) => {
     try{
         const fetched = await fetch('https://covid-api.mmediagroup.fr/v1/cases');
@@ -20,8 +26,8 @@ const renderStats = async (country) => {
         population.innerHTML = `<span class="symbol">👨‍👩‍👧 </span> Population: <span class="population">${countryData.population}</span>`
     }   
     catch(err){
-        alert('We could not find a country with the given name \nThe reason probably is that the data of this country is not found in the API we are using or you misspell the name')
-        console.error(`${new Error('Country not found')} | ${err.message}`)
+        liveAlert(`Country Not Found! <br><hr> This is probably because you misspelled the name, or the country statistics are not provided by the API we use`, 'secondary')
+        console.error(err.message)
     }
 }
 
@@ -36,6 +42,7 @@ const renderDefaultStats = async () => {
         console.error(err.message)
     }
 };
+
 renderDefaultStats();
 
 inputElem.addEventListener('input',() => {
