@@ -20,7 +20,7 @@ const renderStats = async (country) => {
         population.innerHTML = `<span class="symbol">👨‍👩‍👧 </span> Population: <span class="population">${countryData.population}</span>`
     }   
     catch(err){
-        alert('We could not find a country with the given name \nThe reason probably is that the data of this country is not found in the API we are using or you misspell the name')
+        alert('We could not find a country with the given name \nThe reason probably is that the data of this country is not found in the API we are using or you misspell a name')
         console.error(`${new Error('Country not found')} | ${err.message}`)
     }
 }
