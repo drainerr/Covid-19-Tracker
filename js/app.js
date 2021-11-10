@@ -39,6 +39,7 @@ const renderDefaultStats = async () => {
         renderStats(data.countryName)
     }
     catch(err){
+        liveAlert('We could not locate the country you are in, please try to search for its statistics manually','secondary')
         console.error(err.message)
     }
 };
