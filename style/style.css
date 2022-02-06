@@ -78,18 +78,35 @@ body .stats-container form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 body .stats-container form input {
-  height: 30px;
+  height: 32px;
   font-size: 18px;
   padding-left: 5px;
+  outline-style: unset;
+  border-radius: 5px;
 }
 
 body .stats-container form button {
   height: 30px;
   font-size: 16px;
   padding: 0px 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   border: none;
   cursor: pointer;
   border-radius: 3px;

@@ -52,15 +52,22 @@ body {
       margin: 10px 0;
       font-size: 1.5em;
       display: flex;
+      justify-content: center;
+      align-items: center;
       input {
-        height: 30px;
+        height: 32px;
         font-size: 18px;
         padding-left: 5px;
+        outline-style: unset;
+        border-radius: 5px;
       }
       button {
         height: 30px;
         font-size: 16px;
         padding: 0px 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         border: none;
         cursor: pointer;
         border-radius: 3px;
